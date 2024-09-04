@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سرّی مخصوص سونیا</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1001;
+            max-width: 300px;
+        }
+
+        #popup p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #popup button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #popup button:hover {
+            background-color: #45a049;
+        }
+
+        #popup .no-button {
+            background-color: #f44336;
+        }
+
+        #popup .no-button:hover {
+            background-color: #e53935;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="showPopup()">سونیا اگه منو میبینی لمسم کن</a>
+
+    <div id="overlay"></div>
+
+    <div id="popup">
+        <p>آیا با من ازدواج می‌کنی؟</p>
+        <div class="button-container">
+            <button onclick="acceptProposal()">بله</button>
+            <button class="no-button" onclick="moveNoButton()">خیر</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+            window.onbeforeunload = function() {
+                return "تا زمانی که روی 'بله' کلیک نکنید نمی‌توانید صفحه را ببندید.";
+            };
+        }
+
+        function acceptProposal() {
+            alert(" میدونستم قبول میکنی ");
+            closePopup();
+        }
+
+        function moveNoButton() {
+            var noButton = document.querySelector(".no-button");
+            var x = Math.random() * (window.innerWidth - noButton.clientWidth);
+            var y = Math.random() * (window.innerHeight - noButton.clientHeight);
+            noButton.style.position = 'absolute';
+            noButton.style.left = x + "px";
+            noButton.style.top = y + "px";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+            window.onbeforeunload = null;
+        }
+    </script>
+</body>
+</html>
